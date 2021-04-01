@@ -1,0 +1,21 @@
+version: '3'
+services:
+  service:
+    build: .
+    command: "npm run start:service"
+    ports:
+      - "3000:80"
+    depends_on:
+      - db
+    environment:
+      - PROC_TITLE=service
+      - DB_CONNECTION_STRING=postgres://server_db_user:server_db_password@db:5432/server_db
+
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=server_db_user
+      - POSTGRES_PASSWORD=server_db_password
+      - POSTGRES_DB=server_db
