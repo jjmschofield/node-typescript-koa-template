@@ -1,5 +1,5 @@
-import {getDb} from "../db";
-import {HeroModel} from "./model";
+import {getDb} from "../../db";
+import {HeroModel} from "../db/model";
 import {HeroRecord} from "./types";
 import log from "../../../lib/logger";
 

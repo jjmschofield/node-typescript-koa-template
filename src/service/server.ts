@@ -1,22 +1,12 @@
 import 'source-map-support/register';
-import Router from "koa-router";
-
 import log from '../lib/logger';
 import config from '../lib/config';
 import {createApp, startHttpServer} from "../lib/koa";
-import {initDb, syncDb, getDb} from "./lib/db";
-import * as hero from "./routes/hero";
+import {initDb, syncDb, getDb} from "./db";
+import {createRouter} from "./router";
 
 export const server = async () => {
-  const router = new Router();
-
-  router.post('/heroes/create', hero.createCtrl);
-  router.get('/heroes/:id', hero.getCtrl);
-  router.delete('/heroes/:id', hero.destroyCtrl);
-  router.get('/heroes', hero.listCtrl);
-
-  const app = createApp(router);
-
+  const app = createApp(createRouter());
   startHttpServer(app, process.env.HTTP_PORT || '80');
 };
 

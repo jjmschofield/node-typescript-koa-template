@@ -1,5 +1,5 @@
 import {Sequelize, DataTypes, Model} from 'sequelize';
-import {HeroRecord} from "./types";
+import {HeroRecord} from "../lib/types";
 
 export class HeroModel extends Model {
   public id: string | undefined;

@@ -30,9 +30,9 @@ You have:
 ## Structure
 
 ### Routes
-[src/service/routes/hero](src/service/routes/hero/index.ts) - An example resource in your API, all route controllers exported in a single place
+[src/service/hero/routes](src/service/hero/routes/index.ts) - An example resource in your API, all route controllers exported in a single place
 
-[src/service/routes/hero/create.ts](src/service/routes/hero/create.ts) - An example route controller, note that it contains absolutely no business logic
+[src/service/hero/routes/create.ts](src/service/hero/routes/create.ts) - An example route controller, note that it contains absolutely no business logic
 
 [src/service/server.ts](src/service/server.ts) - Server startup and route registration
 
@@ -40,11 +40,11 @@ You have:
 
 [src/service/lib/hero](src/service/lib/hero) - an example domain model managed by your service
 
-[src/service/lib/hero/model.ts](src/service/lib/hero/model.ts) - an example model, representing a repository if you like. Note `toPojo` is so that you don't loose control of your data layer by spreading your ORM models all over the system.
+[src/service/lib/hero/model.ts](src/service/hero/db/model.ts) - an example model, representing a repository if you like. Note `toPojo` is so that you don't loose control of your data layer by spreading your ORM models all over the system.
 
-[src/service/lib/hero/create.ts](src/service/lib/hero/create.ts) - an example action, actions to be carried out on a resource actions are always verbs
+[src/service/lib/hero/create.ts](src/service/hero/lib/create.ts) - an example action, actions to be carried out on a resource actions are always verbs
 
-[src/service/lib/db](src/service/lib/db) - DB setup, ORM model registration and sync
+[src/service/db](src/service/db) - DB setup, ORM model registration and sync
 
 ### service
 [src/service](src/service) - you can copy this to get multiple services if you want (create new services in docker compose)

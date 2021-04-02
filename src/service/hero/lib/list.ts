@@ -1,5 +1,5 @@
 import {HeroRecord} from "./types";
-import {HeroModel} from "./model";
+import {HeroModel} from "../db/model";
 import log from "../../../lib/logger";
 
 export const listHero = async (limit: number, offset: number): Promise<HeroRecord[]> => {

@@ -1,4 +1,4 @@
-import {HeroModel} from "./model";
+import {HeroModel} from "../db/model";
 import {HeroRecord} from "./types";
 import log from "../../../lib/logger";
 

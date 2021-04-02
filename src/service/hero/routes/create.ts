@@ -1,13 +1,13 @@
-import {Context} from "koa";
-import {destroyHero} from "../../lib/hero";
 import Joi from "joi";
+import {Context} from "koa";
+import {createHero} from "../lib";
 
 interface ValidRequest {
-  id: string,
+  name: string,
   valid: boolean,
 }
 
-export const destroyCtrl = async (ctx: Context, next: Function) => {
+export const createCtrl = async (ctx: Context, next: Function) => {
   const req = getValidatedReq(ctx);
 
   if (!req.valid) {
@@ -15,19 +15,21 @@ export const destroyCtrl = async (ctx: Context, next: Function) => {
     return;
   }
 
-  await destroyHero(req.id);
+  const hero = await createHero(req.name);
 
   ctx.status = 200;
+  ctx.body = {hero};
 };
 
 const getValidatedReq = (ctx: Context): ValidRequest => {
   const req = {
-    id: ctx.params.id
+    name: ctx.request.body.name,
   }
 
   const schema = Joi.object({
-    id: Joi.string()
-      .uuid()
+    name: Joi.string()
+      .min(3)
+      .max(256)
       .required(),
   });
 
