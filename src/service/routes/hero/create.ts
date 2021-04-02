@@ -3,7 +3,7 @@ import {Context} from "koa";
 import {createHero} from "../../lib/hero";
 
 interface ValidRequest {
-  body: { name: string },
+  name: string,
   valid: boolean,
 }
 
@@ -15,7 +15,7 @@ export const createCtrl = async (ctx: Context, next: Function) => {
     return;
   }
 
-  const hero = await createHero(req.body.name);
+  const hero = await createHero(req.name);
 
   ctx.status = 200;
   ctx.body = {hero};
@@ -23,7 +23,7 @@ export const createCtrl = async (ctx: Context, next: Function) => {
 
 const getValidatedReq = (ctx: Context): ValidRequest => {
   const req = {
-    body: {name: ctx.request.body.name}
+    name: ctx.request.body.name,
   }
 
   const schema = Joi.object({
@@ -35,5 +35,5 @@ const getValidatedReq = (ctx: Context): ValidRequest => {
 
   const validation = schema.validate(req);
 
-  return {...req, valid: !!validation.error};
+  return {...req, valid: !validation.error};
 }

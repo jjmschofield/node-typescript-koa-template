@@ -3,7 +3,7 @@ import {destroyHero} from "../../lib/hero";
 import Joi from "joi";
 
 interface ValidRequest {
-  params: { id: string },
+  id: string,
   valid: boolean,
 }
 
@@ -15,14 +15,14 @@ export const destroyCtrl = async (ctx: Context, next: Function) => {
     return;
   }
 
-  await destroyHero(req.params.id);
+  await destroyHero(req.id);
 
   ctx.status = 200;
 };
 
 const getValidatedReq = (ctx: Context): ValidRequest => {
   const req = {
-    params: {id: ctx.params.id}
+    id: ctx.params.id
   }
 
   const schema = Joi.object({
@@ -33,5 +33,5 @@ const getValidatedReq = (ctx: Context): ValidRequest => {
 
   const validation = schema.validate(req);
 
-  return {...req, valid: !!validation.error};
+  return {...req, valid: !validation.error};
 }
